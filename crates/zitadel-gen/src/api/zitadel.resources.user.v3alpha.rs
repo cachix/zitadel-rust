@@ -1746,5 +1746,6 @@ pub struct RemoveIdpAuthenticatorResponse {
     #[prost(message, optional, tag="1")]
     pub details: ::core::option::Option<super::super::object::v3alpha::Details>,
 }
+include!("zitadel.resources.user.v3alpha.serde.rs");
 include!("zitadel.resources.user.v3alpha.tonic.rs");
 // @@protoc_insertion_point(module)

@@ -694,4 +694,5 @@ pub struct PasswordlessRegistrationDoneScreenText {
     #[prost(string, tag="5")]
     pub description_close: ::prost::alloc::string::String,
 }
+include!("zitadel.text.v1.serde.rs");
 // @@protoc_insertion_point(module)

@@ -584,5 +584,6 @@ pub struct ListExecutionServicesResponse {
     #[prost(string, repeated, tag="1")]
     pub services: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+include!("zitadel.action.v2beta.serde.rs");
 include!("zitadel.action.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

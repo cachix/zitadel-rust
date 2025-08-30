@@ -758,5 +758,6 @@ pub struct GetMyLoginPolicyResponse {
     #[prost(message, optional, tag="1")]
     pub policy: ::core::option::Option<super::super::policy::v1::LoginPolicy>,
 }
+include!("zitadel.auth.v1.serde.rs");
 include!("zitadel.auth.v1.tonic.rs");
 // @@protoc_insertion_point(module)

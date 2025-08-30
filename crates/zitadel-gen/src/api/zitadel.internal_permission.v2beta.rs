@@ -388,5 +388,6 @@ pub struct DeleteAdministratorResponse {
     #[prost(message, optional, tag="1")]
     pub deletion_date: ::core::option::Option<::pbjson_types::Timestamp>,
 }
+include!("zitadel.internal_permission.v2beta.serde.rs");
 include!("zitadel.internal_permission.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

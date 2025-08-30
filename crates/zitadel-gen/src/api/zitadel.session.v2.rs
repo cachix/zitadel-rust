@@ -480,5 +480,6 @@ pub struct CheckOtp {
     #[prost(string, tag="1")]
     pub code: ::prost::alloc::string::String,
 }
+include!("zitadel.session.v2.serde.rs");
 include!("zitadel.session.v2.tonic.rs");
 // @@protoc_insertion_point(module)

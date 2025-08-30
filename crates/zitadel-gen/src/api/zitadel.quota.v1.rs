@@ -49,4 +49,5 @@ impl Unit {
         }
     }
 }
+include!("zitadel.quota.v1.serde.rs");
 // @@protoc_insertion_point(module)

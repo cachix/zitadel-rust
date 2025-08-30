@@ -324,4 +324,5 @@ impl SmsProviderConfigState {
         }
     }
 }
+include!("zitadel.settings.v1.serde.rs");
 // @@protoc_insertion_point(module)

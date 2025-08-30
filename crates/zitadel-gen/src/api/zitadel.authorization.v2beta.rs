@@ -365,5 +365,6 @@ pub struct DeactivateAuthorizationResponse {
     #[prost(message, optional, tag="1")]
     pub change_date: ::core::option::Option<::pbjson_types::Timestamp>,
 }
+include!("zitadel.authorization.v2beta.serde.rs");
 include!("zitadel.authorization.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

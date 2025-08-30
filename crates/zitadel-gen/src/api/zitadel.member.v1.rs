@@ -113,4 +113,5 @@ impl MemberFieldColumnName {
         }
     }
 }
+include!("zitadel.member.v1.serde.rs");
 // @@protoc_insertion_point(module)

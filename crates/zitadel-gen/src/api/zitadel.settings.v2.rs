@@ -621,5 +621,6 @@ pub struct SetHostedLoginTranslationResponse {
     #[prost(string, tag="1")]
     pub etag: ::prost::alloc::string::String,
 }
+include!("zitadel.settings.v2.serde.rs");
 include!("zitadel.settings.v2.tonic.rs");
 // @@protoc_insertion_point(module)

@@ -5278,5 +5278,6 @@ pub struct SetTriggerActionsResponse {
     #[prost(message, optional, tag="1")]
     pub details: ::core::option::Option<super::super::v1::ObjectDetails>,
 }
+include!("zitadel.management.v1.serde.rs");
 include!("zitadel.management.v1.tonic.rs");
 // @@protoc_insertion_point(module)

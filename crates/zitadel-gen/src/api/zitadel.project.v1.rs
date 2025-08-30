@@ -277,4 +277,5 @@ impl ProjectGrantState {
         }
     }
 }
+include!("zitadel.project.v1.serde.rs");
 // @@protoc_insertion_point(module)

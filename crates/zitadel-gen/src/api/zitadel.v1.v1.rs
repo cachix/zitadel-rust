@@ -340,4 +340,5 @@ impl TriggerType {
         }
     }
 }
+include!("zitadel.v1.v1.serde.rs");
 // @@protoc_insertion_point(module)

@@ -26,4 +26,5 @@ impl InstanceFeature {
         }
     }
 }
+include!("zitadel.feature.v1.serde.rs");
 // @@protoc_insertion_point(module)

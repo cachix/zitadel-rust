@@ -217,5 +217,6 @@ pub struct ListOrganizationsResponse {
     #[prost(message, repeated, tag="3")]
     pub result: ::prost::alloc::vec::Vec<Organization>,
 }
+include!("zitadel.org.v2.serde.rs");
 include!("zitadel.org.v2.tonic.rs");
 // @@protoc_insertion_point(module)

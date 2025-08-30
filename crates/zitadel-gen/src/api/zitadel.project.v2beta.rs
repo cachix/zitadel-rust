@@ -746,5 +746,6 @@ pub struct ListProjectGrantsResponse {
     #[prost(message, repeated, tag="2")]
     pub project_grants: ::prost::alloc::vec::Vec<ProjectGrant>,
 }
+include!("zitadel.project.v2beta.serde.rs");
 include!("zitadel.project.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

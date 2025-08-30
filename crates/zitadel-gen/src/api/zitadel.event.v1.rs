@@ -52,4 +52,5 @@ pub struct AggregateType {
     #[prost(message, optional, tag="2")]
     pub localized: ::core::option::Option<super::super::v1::LocalizedMessage>,
 }
+include!("zitadel.event.v1.serde.rs");
 // @@protoc_insertion_point(module)

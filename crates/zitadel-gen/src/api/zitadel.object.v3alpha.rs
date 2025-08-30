@@ -74,4 +74,5 @@ impl OwnerType {
         }
     }
 }
+include!("zitadel.object.v3alpha.serde.rs");
 // @@protoc_insertion_point(module)

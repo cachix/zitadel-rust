@@ -322,4 +322,5 @@ impl PasswordlessType {
         }
     }
 }
+include!("zitadel.policy.v1.serde.rs");
 // @@protoc_insertion_point(module)

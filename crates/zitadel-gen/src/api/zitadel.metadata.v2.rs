@@ -35,4 +35,5 @@ pub struct MetadataKeyFilter {
     #[prost(enumeration="super::super::filter::v2::TextFilterMethod", tag="2")]
     pub method: i32,
 }
+include!("zitadel.metadata.v2.serde.rs");
 // @@protoc_insertion_point(module)

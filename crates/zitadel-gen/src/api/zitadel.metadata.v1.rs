@@ -33,4 +33,5 @@ pub struct MetadataKeyQuery {
     #[prost(enumeration="super::super::v1::TextQueryMethod", tag="2")]
     pub method: i32,
 }
+include!("zitadel.metadata.v1.serde.rs");
 // @@protoc_insertion_point(module)

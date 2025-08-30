@@ -30,4 +30,5 @@ pub struct ChangeQuery {
     #[prost(bool, tag="3")]
     pub asc: bool,
 }
+include!("zitadel.change.v1.serde.rs");
 // @@protoc_insertion_point(module)

@@ -274,5 +274,6 @@ pub struct ListWebKeysResponse {
     #[prost(message, repeated, tag="1")]
     pub web_keys: ::prost::alloc::vec::Vec<WebKey>,
 }
+include!("zitadel.webkey.v2.serde.rs");
 include!("zitadel.webkey.v2.tonic.rs");
 // @@protoc_insertion_point(module)

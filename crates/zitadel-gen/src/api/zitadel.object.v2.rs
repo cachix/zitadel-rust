@@ -198,4 +198,5 @@ impl TimestampQueryMethod {
         }
     }
 }
+include!("zitadel.object.v2.serde.rs");
 // @@protoc_insertion_point(module)

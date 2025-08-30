@@ -1507,5 +1507,6 @@ impl AuthenticationMethodType {
         }
     }
 }
+include!("zitadel.user.v2beta.serde.rs");
 include!("zitadel.user.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

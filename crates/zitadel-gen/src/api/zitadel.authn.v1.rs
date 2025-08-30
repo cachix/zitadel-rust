@@ -38,4 +38,5 @@ impl KeyType {
         }
     }
 }
+include!("zitadel.authn.v1.serde.rs");
 // @@protoc_insertion_point(module)

@@ -283,5 +283,6 @@ pub struct GetUserFeaturesResponse {
     #[prost(message, optional, tag="1")]
     pub details: ::core::option::Option<super::super::object::v2beta::Details>,
 }
+include!("zitadel.feature.v2beta.serde.rs");
 include!("zitadel.feature.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

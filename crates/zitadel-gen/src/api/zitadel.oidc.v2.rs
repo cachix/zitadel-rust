@@ -256,5 +256,6 @@ pub struct Deny {
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AuthorizeOrDenyDeviceAuthorizationResponse {
 }
+include!("zitadel.oidc.v2.serde.rs");
 include!("zitadel.oidc.v2.tonic.rs");
 // @@protoc_insertion_point(module)

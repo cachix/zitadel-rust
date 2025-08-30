@@ -21,4 +21,5 @@ pub struct Details {
     #[prost(message, optional, tag="3")]
     pub owner: ::core::option::Option<super::super::super::object::v3alpha::Owner>,
 }
+include!("zitadel.settings.object.v3alpha.serde.rs");
 // @@protoc_insertion_point(module)

@@ -171,4 +171,5 @@ impl FlowState {
         }
     }
 }
+include!("zitadel.action.v1.serde.rs");
 // @@protoc_insertion_point(module)

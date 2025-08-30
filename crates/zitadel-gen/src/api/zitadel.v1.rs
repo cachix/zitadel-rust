@@ -184,4 +184,5 @@ pub struct AuthOption {
     #[prost(string, tag="2")]
     pub check_field_name: ::prost::alloc::string::String,
 }
+include!("zitadel.v1.serde.rs");
 // @@protoc_insertion_point(module)

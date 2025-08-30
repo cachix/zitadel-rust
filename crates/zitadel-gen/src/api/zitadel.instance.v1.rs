@@ -240,4 +240,5 @@ impl DomainFieldName {
         }
     }
 }
+include!("zitadel.instance.v1.serde.rs");
 // @@protoc_insertion_point(module)

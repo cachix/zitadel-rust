@@ -732,4 +732,5 @@ impl AzureAdTenantType {
         }
     }
 }
+include!("zitadel.idp.v1.serde.rs");
 // @@protoc_insertion_point(module)

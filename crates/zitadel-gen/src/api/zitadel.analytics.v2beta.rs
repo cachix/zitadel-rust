@@ -120,5 +120,6 @@ pub struct ReportResourceCountsResponse {
     #[prost(string, tag="1")]
     pub report_id: ::prost::alloc::string::String,
 }
+include!("zitadel.analytics.v2beta.serde.rs");
 include!("zitadel.analytics.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

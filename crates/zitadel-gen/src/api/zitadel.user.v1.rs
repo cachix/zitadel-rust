@@ -887,4 +887,5 @@ impl UserGrantState {
         }
     }
 }
+include!("zitadel.user.v1.serde.rs");
 // @@protoc_insertion_point(module)

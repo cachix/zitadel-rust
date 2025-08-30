@@ -99,5 +99,6 @@ pub struct ListDebugEventsStatesResponse {
     #[prost(message, repeated, tag="1")]
     pub states: ::prost::alloc::vec::Vec<State>,
 }
+include!("zitadel.resources.debug_events.v3alpha.serde.rs");
 include!("zitadel.resources.debug_events.v3alpha.tonic.rs");
 // @@protoc_insertion_point(module)

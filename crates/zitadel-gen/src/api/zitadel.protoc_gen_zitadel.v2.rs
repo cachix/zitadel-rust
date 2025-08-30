@@ -22,4 +22,5 @@ pub struct CustomHttpResponse {
     #[prost(int32, tag="1")]
     pub success_code: i32,
 }
+include!("zitadel.protoc_gen_zitadel.v2.serde.rs");
 // @@protoc_insertion_point(module)

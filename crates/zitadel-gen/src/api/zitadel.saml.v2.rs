@@ -150,5 +150,6 @@ pub struct PostResponse {
     #[prost(string, tag="2")]
     pub saml_response: ::prost::alloc::string::String,
 }
+include!("zitadel.saml.v2.serde.rs");
 include!("zitadel.saml.v2.tonic.rs");
 // @@protoc_insertion_point(module)

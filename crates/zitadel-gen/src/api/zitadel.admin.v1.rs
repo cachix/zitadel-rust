@@ -3971,5 +3971,6 @@ pub struct GetRestrictionsResponse {
     #[prost(string, repeated, tag="3")]
     pub allowed_languages: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+include!("zitadel.admin.v1.serde.rs");
 include!("zitadel.admin.v1.tonic.rs");
 // @@protoc_insertion_point(module)

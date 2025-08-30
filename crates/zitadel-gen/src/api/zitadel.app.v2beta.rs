@@ -934,5 +934,6 @@ pub struct ListApplicationKeysResponse {
     #[prost(message, optional, tag="2")]
     pub pagination: ::core::option::Option<super::super::filter::v2::PaginationResponse>,
 }
+include!("zitadel.app.v2beta.serde.rs");
 include!("zitadel.app.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

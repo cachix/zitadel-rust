@@ -427,5 +427,6 @@ pub struct ListTrustedDomainsResponse {
     #[prost(message, optional, tag="2")]
     pub pagination: ::core::option::Option<super::super::filter::v2beta::PaginationResponse>,
 }
+include!("zitadel.instance.v2beta.serde.rs");
 include!("zitadel.instance.v2beta.tonic.rs");
 // @@protoc_insertion_point(module)

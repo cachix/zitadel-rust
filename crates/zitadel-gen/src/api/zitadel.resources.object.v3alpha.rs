@@ -71,4 +71,5 @@ impl TextFilterMethod {
         }
     }
 }
+include!("zitadel.resources.object.v3alpha.serde.rs");
 // @@protoc_insertion_point(module)

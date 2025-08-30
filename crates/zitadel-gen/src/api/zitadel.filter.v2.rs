@@ -146,4 +146,5 @@ impl TimestampFilterMethod {
         }
     }
 }
+include!("zitadel.filter.v2.serde.rs");
 // @@protoc_insertion_point(module)
