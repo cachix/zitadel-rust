@@ -85,16 +85,12 @@ where
             // Verify signature if configured
             if let Some(verifier) = &verifier {
                 let signature = headers
-                    .get("x-zitadel-signature")
+                    .get("zitadel-signature")
                     .ok_or(WebhookError::MissingSignature)?
                     .to_str()
                     .map_err(|_| WebhookError::InvalidSignature)?;
                 
-                let timestamp = headers
-                    .get("x-zitadel-timestamp")
-                    .and_then(|h| h.to_str().ok());
-                
-                verifier.verify(&body, signature, timestamp)?;
+                verifier.verify(&body, signature)?;
             }
             
             // Parse request
