@@ -8,5 +8,6 @@
     pkgs.protoc-gen-prost
     pkgs.protoc-gen-tonic
     pkgs.protoc-gen-prost-crate
+    pkgs.protoc-gen-prost-serde
   ];
 }
