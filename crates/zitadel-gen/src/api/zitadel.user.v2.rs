@@ -56,13 +56,13 @@ impl PasskeyAuthenticator {
 pub struct SetHumanEmail {
     #[prost(string, tag="1")]
     pub email: ::prost::alloc::string::String,
-    /// if no verification is specified, an email is sent with the default url
+    /// If no verification is specified, an email is sent with the default url
     #[prost(oneof="set_human_email::Verification", tags="2, 3, 4")]
     pub verification: ::core::option::Option<set_human_email::Verification>,
 }
 /// Nested message and enum types in `SetHumanEmail`.
 pub mod set_human_email {
-    /// if no verification is specified, an email is sent with the default url
+    /// If no verification is specified, an email is sent with the default url
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Verification {
@@ -181,6 +181,102 @@ pub struct IdpLink {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FormData {
+    /// The URL to which the form should be submitted using the POST method.
+    #[prost(string, tag="1")]
+    pub url: ::prost::alloc::string::String,
+    /// The form fields to be submitted.
+    /// Each field is represented as a key-value pair, where the key is the field / input name
+    /// and the value is the field / input value.
+    /// All fields need to be submitted as is and as input type "text".
+    #[prost(map="string, string", tag="2")]
+    pub fields: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Key {
+    /// The timestamp of the key creation.
+    #[prost(message, optional, tag="1")]
+    pub creation_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// The timestamp of the last change of the key.
+    #[prost(message, optional, tag="2")]
+    pub change_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// The unique identifier of the key.
+    #[prost(string, tag="3")]
+    pub id: ::prost::alloc::string::String,
+    /// The unique identifier of the user the key belongs to.
+    #[prost(string, tag="4")]
+    pub user_id: ::prost::alloc::string::String,
+    /// The unique identifier of the organization the key belongs to.
+    #[prost(string, tag="5")]
+    pub organization_id: ::prost::alloc::string::String,
+    /// The keys expiration date.
+    #[prost(message, optional, tag="6")]
+    pub expiration_date: ::core::option::Option<::pbjson_types::Timestamp>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct KeysSearchFilter {
+    #[prost(oneof="keys_search_filter::Filter", tags="1, 2, 3, 4, 5")]
+    pub filter: ::core::option::Option<keys_search_filter::Filter>,
+}
+/// Nested message and enum types in `KeysSearchFilter`.
+pub mod keys_search_filter {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        #[prost(message, tag="1")]
+        KeyIdFilter(super::super::super::filter::v2::IdFilter),
+        #[prost(message, tag="2")]
+        UserIdFilter(super::super::super::filter::v2::IdFilter),
+        #[prost(message, tag="3")]
+        OrganizationIdFilter(super::super::super::filter::v2::IdFilter),
+        #[prost(message, tag="4")]
+        CreatedDateFilter(super::super::super::filter::v2::TimestampFilter),
+        #[prost(message, tag="5")]
+        ExpirationDateFilter(super::super::super::filter::v2::TimestampFilter),
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum KeyFieldName {
+    Unspecified = 0,
+    CreatedDate = 1,
+    Id = 2,
+    UserId = 3,
+    OrganizationId = 4,
+    KeyExpirationDate = 5,
+}
+impl KeyFieldName {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            KeyFieldName::Unspecified => "KEY_FIELD_NAME_UNSPECIFIED",
+            KeyFieldName::CreatedDate => "KEY_FIELD_NAME_CREATED_DATE",
+            KeyFieldName::Id => "KEY_FIELD_NAME_ID",
+            KeyFieldName::UserId => "KEY_FIELD_NAME_USER_ID",
+            KeyFieldName::OrganizationId => "KEY_FIELD_NAME_ORGANIZATION_ID",
+            KeyFieldName::KeyExpirationDate => "KEY_FIELD_NAME_KEY_EXPIRATION_DATE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "KEY_FIELD_NAME_UNSPECIFIED" => Some(Self::Unspecified),
+            "KEY_FIELD_NAME_CREATED_DATE" => Some(Self::CreatedDate),
+            "KEY_FIELD_NAME_ID" => Some(Self::Id),
+            "KEY_FIELD_NAME_USER_ID" => Some(Self::UserId),
+            "KEY_FIELD_NAME_ORGANIZATION_ID" => Some(Self::OrganizationId),
+            "KEY_FIELD_NAME_KEY_EXPIRATION_DATE" => Some(Self::KeyExpirationDate),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Password {
     #[prost(string, tag="1")]
     pub password: ::prost::alloc::string::String,
@@ -263,6 +359,89 @@ impl NotificationType {
             "NOTIFICATION_TYPE_Unspecified" => Some(Self::Unspecified),
             "NOTIFICATION_TYPE_Email" => Some(Self::Email),
             "NOTIFICATION_TYPE_SMS" => Some(Self::Sms),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PersonalAccessToken {
+    /// The timestamp of the personal access token creation.
+    #[prost(message, optional, tag="1")]
+    pub creation_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// The timestamp of the last change of the personal access token.
+    #[prost(message, optional, tag="2")]
+    pub change_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// The unique identifier of the personal access token.
+    #[prost(string, tag="3")]
+    pub id: ::prost::alloc::string::String,
+    /// The unique identifier of the user the personal access token belongs to.
+    #[prost(string, tag="4")]
+    pub user_id: ::prost::alloc::string::String,
+    /// The unique identifier of the organization the personal access token belongs to.
+    #[prost(string, tag="5")]
+    pub organization_id: ::prost::alloc::string::String,
+    /// The personal access tokens expiration date.
+    #[prost(message, optional, tag="6")]
+    pub expiration_date: ::core::option::Option<::pbjson_types::Timestamp>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PersonalAccessTokensSearchFilter {
+    #[prost(oneof="personal_access_tokens_search_filter::Filter", tags="1, 2, 3, 4, 5")]
+    pub filter: ::core::option::Option<personal_access_tokens_search_filter::Filter>,
+}
+/// Nested message and enum types in `PersonalAccessTokensSearchFilter`.
+pub mod personal_access_tokens_search_filter {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        #[prost(message, tag="1")]
+        TokenIdFilter(super::super::super::filter::v2::IdFilter),
+        #[prost(message, tag="2")]
+        UserIdFilter(super::super::super::filter::v2::IdFilter),
+        #[prost(message, tag="3")]
+        OrganizationIdFilter(super::super::super::filter::v2::IdFilter),
+        #[prost(message, tag="4")]
+        CreatedDateFilter(super::super::super::filter::v2::TimestampFilter),
+        #[prost(message, tag="5")]
+        ExpirationDateFilter(super::super::super::filter::v2::TimestampFilter),
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PersonalAccessTokenFieldName {
+    Unspecified = 0,
+    CreatedDate = 1,
+    Id = 2,
+    UserId = 3,
+    OrganizationId = 4,
+    ExpirationDate = 5,
+}
+impl PersonalAccessTokenFieldName {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PersonalAccessTokenFieldName::Unspecified => "PERSONAL_ACCESS_TOKEN_FIELD_NAME_UNSPECIFIED",
+            PersonalAccessTokenFieldName::CreatedDate => "PERSONAL_ACCESS_TOKEN_FIELD_NAME_CREATED_DATE",
+            PersonalAccessTokenFieldName::Id => "PERSONAL_ACCESS_TOKEN_FIELD_NAME_ID",
+            PersonalAccessTokenFieldName::UserId => "PERSONAL_ACCESS_TOKEN_FIELD_NAME_USER_ID",
+            PersonalAccessTokenFieldName::OrganizationId => "PERSONAL_ACCESS_TOKEN_FIELD_NAME_ORGANIZATION_ID",
+            PersonalAccessTokenFieldName::ExpirationDate => "PERSONAL_ACCESS_TOKEN_FIELD_NAME_EXPIRATION_DATE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "PERSONAL_ACCESS_TOKEN_FIELD_NAME_UNSPECIFIED" => Some(Self::Unspecified),
+            "PERSONAL_ACCESS_TOKEN_FIELD_NAME_CREATED_DATE" => Some(Self::CreatedDate),
+            "PERSONAL_ACCESS_TOKEN_FIELD_NAME_ID" => Some(Self::Id),
+            "PERSONAL_ACCESS_TOKEN_FIELD_NAME_USER_ID" => Some(Self::UserId),
+            "PERSONAL_ACCESS_TOKEN_FIELD_NAME_ORGANIZATION_ID" => Some(Self::OrganizationId),
+            "PERSONAL_ACCESS_TOKEN_FIELD_NAME_EXPIRATION_DATE" => Some(Self::ExpirationDate),
             _ => None,
         }
     }
@@ -481,13 +660,13 @@ pub struct AuthFactorU2f {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendInviteCode {
     /// Optionally set a url_template, which will be used in the invite mail sent by ZITADEL to guide the user to your invitation page.
-    /// If no template is set, the default ZITADEL url will be used.
+    /// If no template is set and no previous code was created, the default ZITADEL url will be used.
     ///
     /// The following placeholders can be used: UserID, OrgID, Code
     #[prost(string, optional, tag="1")]
     pub url_template: ::core::option::Option<::prost::alloc::string::String>,
     /// Optionally set an application name, which will be used in the invite mail sent by ZITADEL.
-    /// If no application name is set, ZITADEL will be used as default.
+    /// If no application name is set and no previous code was created, ZITADEL will be used as default.
     #[prost(string, optional, tag="2")]
     pub application_name: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -928,6 +1107,120 @@ pub struct AddHumanUserResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateUserRequest {
+    /// The unique identifier of the organization the user belongs to.
+    #[prost(string, tag="1")]
+    pub organization_id: ::prost::alloc::string::String,
+    /// The ID is a unique identifier for the user in the instance.
+    /// If not specified, it will be generated.
+    /// You can set your own user id that is unique within the instance.
+    /// This is useful in migration scenarios, for example if the user already has an ID in another Zitadel system.
+    /// If not specified, it will be generated.
+    /// It can't be changed after creation.
+    #[prost(string, optional, tag="2")]
+    pub user_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// The username is a unique identifier for the user in the organization.
+    /// If not specified, Zitadel sets the username to the email for users of type human and to the user_id for users of type machine.
+    /// It is used to identify the user in the organization and can be used for login.
+    #[prost(string, optional, tag="3")]
+    pub username: ::core::option::Option<::prost::alloc::string::String>,
+    /// The type of the user.
+    #[prost(oneof="create_user_request::UserType", tags="4, 5")]
+    pub user_type: ::core::option::Option<create_user_request::UserType>,
+}
+/// Nested message and enum types in `CreateUserRequest`.
+pub mod create_user_request {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Human {
+        /// Set the users profile information.
+        #[prost(message, optional, tag="1")]
+        pub profile: ::core::option::Option<super::SetHumanProfile>,
+        /// Set the users email address and optionally send a verification email.
+        #[prost(message, optional, tag="2")]
+        pub email: ::core::option::Option<super::SetHumanEmail>,
+        /// Set the users phone number and optionally send a verification SMS.
+        #[prost(message, optional, tag="3")]
+        pub phone: ::core::option::Option<super::SetHumanPhone>,
+        /// Create the user with a list of links to identity providers.
+        /// This can be useful in migration-scenarios.
+        /// For example, if a user already has an account in an external identity provider or another Zitadel instance, an IDP link allows the user to authenticate as usual.
+        /// Sessions, second factors, hardware keys registered externally are still available for authentication.
+        /// Use the following endpoints to manage identity provider links:
+        /// - [AddIDPLink](apis/resources/user_service_v2/user-service-add-idp-link.api.mdx)
+        /// - [RemoveIDPLink](apis/resources/user_service_v2/user-service-remove-idp-link.api.mdx)
+        #[prost(message, repeated, tag="7")]
+        pub idp_links: ::prost::alloc::vec::Vec<super::IdpLink>,
+        /// An Implementation of RFC 6238 is used, with HMAC-SHA-1 and time-step of 30 seconds.
+        /// Currently no other options are supported, and if anything different is used the validation will fail.
+        #[prost(string, optional, tag="8")]
+        pub totp_secret: ::core::option::Option<::prost::alloc::string::String>,
+        /// Metadata to bet set. The values have to be base64 encoded.
+        #[prost(message, repeated, tag="9")]
+        pub metadata: ::prost::alloc::vec::Vec<super::Metadata>,
+        /// Set the users initial password and optionally require the user to set a new password.
+        #[prost(oneof="human::PasswordType", tags="4, 5")]
+        pub password_type: ::core::option::Option<human::PasswordType>,
+    }
+    /// Nested message and enum types in `Human`.
+    pub mod human {
+        /// Set the users initial password and optionally require the user to set a new password.
+        #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+        pub enum PasswordType {
+            #[prost(message, tag="4")]
+            Password(super::super::Password),
+            #[prost(message, tag="5")]
+            HashedPassword(super::super::HashedPassword),
+        }
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Machine {
+        /// The machine users name is a human readable field that helps identifying the user.
+        #[prost(string, tag="1")]
+        pub name: ::prost::alloc::string::String,
+        /// The description is a field that helps to remember the purpose of the user.
+        #[prost(string, optional, tag="2")]
+        pub description: ::core::option::Option<::prost::alloc::string::String>,
+    }
+    /// The type of the user.
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum UserType {
+        /// Users of type human are users that are meant to be used by a person.
+        /// They can log in interactively using a login UI.
+        /// By default, new users will receive a verification email and, if a phone is configured, a verification SMS.
+        /// To make sure these messages are sent, configure and activate valid SMTP and Twilio configurations.
+        /// Read more about your options for controlling this behaviour in the email and phone field documentations.
+        #[prost(message, tag="4")]
+        Human(Human),
+        /// Users of type machine are users that are meant to be used by a machine.
+        /// In order to authenticate, [add a secret](apis/resources/user_service_v2/user-service-add-secret.api.mdx), [a key](apis/resources/user_service_v2/user-service-add-key.api.mdx) or [a personal access token](apis/resources/user_service_v2/user-service-add-personal-access-token.api.mdx) to the user.
+        /// Tokens generated for new users of type machine will be of an opaque Bearer type.
+        /// You can change the users token type to JWT by using the [management v1 service method UpdateMachine](apis/resources/mgmt/management-service-update-machine.api.mdx).
+        #[prost(message, tag="5")]
+        Machine(Machine),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateUserResponse {
+    /// The unique identifier of the newly created user.
+    #[prost(string, tag="1")]
+    pub id: ::prost::alloc::string::String,
+    /// The timestamp of the user creation.
+    #[prost(message, optional, tag="2")]
+    pub creation_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// The email verification code if it was requested by setting the email verification to return_code.
+    #[prost(string, optional, tag="3")]
+    pub email_code: ::core::option::Option<::prost::alloc::string::String>,
+    /// The phone verification code if it was requested by setting the phone verification to return_code.
+    #[prost(string, optional, tag="4")]
+    pub phone_code: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetUserByIdRequest {
     #[prost(string, tag="1")]
     pub user_id: ::prost::alloc::string::String,
@@ -1173,6 +1466,108 @@ pub struct DeleteUserRequest {
 pub struct DeleteUserResponse {
     #[prost(message, optional, tag="1")]
     pub details: ::core::option::Option<super::super::object::v2::Details>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateUserRequest {
+    /// The user id is the users unique identifier in the instance.
+    /// It can't be changed.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+    /// Set a new username that is unique within the instance.
+    /// Beware that active tokens and sessions are invalidated when the username is changed.
+    #[prost(string, optional, tag="2")]
+    pub username: ::core::option::Option<::prost::alloc::string::String>,
+    /// Change type specific properties of the user.
+    #[prost(oneof="update_user_request::UserType", tags="3, 4")]
+    pub user_type: ::core::option::Option<update_user_request::UserType>,
+}
+/// Nested message and enum types in `UpdateUserRequest`.
+pub mod update_user_request {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Human {
+        /// Change the users profile information
+        #[prost(message, optional, tag="1")]
+        pub profile: ::core::option::Option<human::Profile>,
+        /// Change the users email address and/or trigger a verification email
+        #[prost(message, optional, tag="2")]
+        pub email: ::core::option::Option<super::SetHumanEmail>,
+        /// Change the users phone number and/or trigger a verification SMS
+        /// To delete the users phone number, leave the phone field empty and omit the verification field.
+        #[prost(message, optional, tag="3")]
+        pub phone: ::core::option::Option<super::SetHumanPhone>,
+        /// Change the users password.
+        /// You can optionally require the current password or the verification code to be correct.
+        #[prost(message, optional, tag="4")]
+        pub password: ::core::option::Option<super::SetPassword>,
+    }
+    /// Nested message and enum types in `Human`.
+    pub mod human {
+        #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct Profile {
+            /// The given name is the first name of the user.
+            /// For example, it can be used to personalize notifications and login UIs.
+            #[prost(string, optional, tag="1")]
+            pub given_name: ::core::option::Option<::prost::alloc::string::String>,
+            /// The family name is the last name of the user.
+            /// For example, it can be used to personalize user interfaces and notifications.
+            #[prost(string, optional, tag="2")]
+            pub family_name: ::core::option::Option<::prost::alloc::string::String>,
+            /// The nick name is the users short name.
+            /// For example, it can be used to personalize user interfaces and notifications.
+            #[prost(string, optional, tag="3")]
+            pub nick_name: ::core::option::Option<::prost::alloc::string::String>,
+            /// The display name is how a user should primarily be displayed in lists.
+            /// It can also for example be used to personalize user interfaces and notifications.
+            #[prost(string, optional, tag="4")]
+            pub display_name: ::core::option::Option<::prost::alloc::string::String>,
+            /// The users preferred language is the language that systems should use to interact with the user.
+            /// It has the format of a [BCP-47 language tag](<https://datatracker.ietf.org/doc/html/rfc3066>).
+            /// It is used by Zitadel where no higher prioritized preferred language can be used.
+            /// For example, browser settings can overwrite a users preferred_language.
+            /// Notification messages and standard login UIs use the users preferred language if it is supported and allowed on the instance.
+            /// Else, the default language of the instance is used.
+            #[prost(string, optional, tag="5")]
+            pub preferred_language: ::core::option::Option<::prost::alloc::string::String>,
+            /// The users gender can for example be used to personalize user interfaces and notifications.
+            #[prost(enumeration="super::super::Gender", optional, tag="6")]
+            pub gender: ::core::option::Option<i32>,
+        }
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Machine {
+        /// The machine users name is a human readable field that helps identifying the user.
+        #[prost(string, optional, tag="1")]
+        pub name: ::core::option::Option<::prost::alloc::string::String>,
+        /// The description is a field that helps to remember the purpose of the user.
+        #[prost(string, optional, tag="2")]
+        pub description: ::core::option::Option<::prost::alloc::string::String>,
+    }
+    /// Change type specific properties of the user.
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum UserType {
+        #[prost(message, tag="3")]
+        Human(Human),
+        #[prost(message, tag="4")]
+        Machine(Machine),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateUserResponse {
+    /// The timestamp of the change of the user.
+    #[prost(message, optional, tag="1")]
+    pub change_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// In case the email verification was set to return_code, the code will be returned
+    #[prost(string, optional, tag="2")]
+    pub email_code: ::core::option::Option<::prost::alloc::string::String>,
+    /// In case the phone verification was set to return_code, the code will be returned
+    #[prost(string, optional, tag="3")]
+    pub phone_code: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1510,7 +1905,7 @@ pub mod start_identity_provider_intent_request {
 pub struct StartIdentityProviderIntentResponse {
     #[prost(message, optional, tag="1")]
     pub details: ::core::option::Option<super::super::object::v2::Details>,
-    #[prost(oneof="start_identity_provider_intent_response::NextStep", tags="2, 3, 4")]
+    #[prost(oneof="start_identity_provider_intent_response::NextStep", tags="2, 3, 4, 5")]
     pub next_step: ::core::option::Option<start_identity_provider_intent_response::NextStep>,
 }
 /// Nested message and enum types in `StartIdentityProviderIntentResponse`.
@@ -1522,8 +1917,13 @@ pub mod start_identity_provider_intent_response {
         AuthUrl(::prost::alloc::string::String),
         #[prost(message, tag="3")]
         IdpIntent(super::IdpIntent),
+        /// POST call information
+        /// Deprecated: Use form_data instead
         #[prost(bytes, tag="4")]
         PostForm(::prost::alloc::vec::Vec<u8>),
+        /// Data for a form POST call
+        #[prost(message, tag="5")]
+        FormData(super::FormData),
     }
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1543,6 +1943,8 @@ pub struct RetrieveIdentityProviderIntentResponse {
     pub idp_information: ::core::option::Option<IdpInformation>,
     #[prost(string, tag="3")]
     pub user_id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="4")]
+    pub add_human_user: ::core::option::Option<AddHumanUserRequest>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1761,6 +2163,231 @@ pub struct HumanMfaInitSkippedRequest {
 pub struct HumanMfaInitSkippedResponse {
     #[prost(message, optional, tag="1")]
     pub details: ::core::option::Option<super::super::object::v2::Details>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddSecretRequest {
+    /// The users resource ID.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddSecretResponse {
+    /// The timestamp of the secret creation.
+    #[prost(message, optional, tag="1")]
+    pub creation_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// The client secret.
+    /// Store this secret in a secure place.
+    /// It is not possible to retrieve it again.
+    #[prost(string, tag="2")]
+    pub client_secret: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveSecretRequest {
+    /// The users resource ID.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct RemoveSecretResponse {
+    /// The timestamp of the secret deletion.
+    #[prost(message, optional, tag="1")]
+    pub deletion_date: ::core::option::Option<::pbjson_types::Timestamp>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddKeyRequest {
+    /// The users resource ID.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+    /// The date the key will expire and no logins will be possible anymore.
+    #[prost(message, optional, tag="2")]
+    pub expiration_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// Optionally provide a public key of your own generated RSA private key.
+    #[prost(bytes="vec", tag="3")]
+    pub public_key: ::prost::alloc::vec::Vec<u8>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddKeyResponse {
+    /// The timestamp of the key creation.
+    #[prost(message, optional, tag="1")]
+    pub creation_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// The keys ID.
+    #[prost(string, tag="2")]
+    pub key_id: ::prost::alloc::string::String,
+    /// The key which is usable to authenticate against the API.
+    #[prost(bytes="vec", tag="3")]
+    pub key_content: ::prost::alloc::vec::Vec<u8>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveKeyRequest {
+    /// The users resource ID.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+    /// The keys ID.
+    #[prost(string, tag="2")]
+    pub key_id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct RemoveKeyResponse {
+    /// The timestamp of the key deletion.
+    #[prost(message, optional, tag="1")]
+    pub deletion_date: ::core::option::Option<::pbjson_types::Timestamp>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListKeysRequest {
+    /// List limitations and ordering.
+    #[prost(message, optional, tag="1")]
+    pub pagination: ::core::option::Option<super::super::filter::v2::PaginationRequest>,
+    /// The field the result is sorted by. The default is the creation date. Beware that if you change this, your result pagination might be inconsistent.
+    #[prost(enumeration="KeyFieldName", optional, tag="2")]
+    pub sorting_column: ::core::option::Option<i32>,
+    /// Define the criteria to query for.
+    #[prost(message, repeated, tag="3")]
+    pub filters: ::prost::alloc::vec::Vec<KeysSearchFilter>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListKeysResponse {
+    #[prost(message, optional, tag="1")]
+    pub pagination: ::core::option::Option<super::super::filter::v2::PaginationResponse>,
+    #[prost(message, repeated, tag="2")]
+    pub result: ::prost::alloc::vec::Vec<Key>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddPersonalAccessTokenRequest {
+    /// The users resource ID.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+    /// The timestamp when the token will expire.
+    #[prost(message, optional, tag="2")]
+    pub expiration_date: ::core::option::Option<::pbjson_types::Timestamp>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddPersonalAccessTokenResponse {
+    /// The timestamp of the personal access token creation.
+    #[prost(message, optional, tag="1")]
+    pub creation_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    /// The tokens ID.
+    #[prost(string, tag="2")]
+    pub token_id: ::prost::alloc::string::String,
+    /// The personal access token that can be used to authenticate against the API
+    #[prost(string, tag="3")]
+    pub token: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemovePersonalAccessTokenRequest {
+    /// The users resource ID.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+    /// The tokens ID.
+    #[prost(string, tag="2")]
+    pub token_id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct RemovePersonalAccessTokenResponse {
+    /// The timestamp of the personal access token deletion.
+    #[prost(message, optional, tag="1")]
+    pub deletion_date: ::core::option::Option<::pbjson_types::Timestamp>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListPersonalAccessTokensRequest {
+    /// List limitations and ordering.
+    #[prost(message, optional, tag="1")]
+    pub pagination: ::core::option::Option<super::super::filter::v2::PaginationRequest>,
+    /// The field the result is sorted by. The default is the creation date. Beware that if you change this, your result pagination might be inconsistent.
+    #[prost(enumeration="PersonalAccessTokenFieldName", optional, tag="2")]
+    pub sorting_column: ::core::option::Option<i32>,
+    /// Define the criteria to query for.
+    #[prost(message, repeated, tag="3")]
+    pub filters: ::prost::alloc::vec::Vec<PersonalAccessTokensSearchFilter>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListPersonalAccessTokensResponse {
+    #[prost(message, optional, tag="1")]
+    pub pagination: ::core::option::Option<super::super::filter::v2::PaginationResponse>,
+    #[prost(message, repeated, tag="2")]
+    pub result: ::prost::alloc::vec::Vec<PersonalAccessToken>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Metadata {
+    /// Key in the metadata key/value pair.
+    #[prost(string, tag="1")]
+    pub key: ::prost::alloc::string::String,
+    /// Value in the metadata key/value pair.
+    #[prost(bytes="vec", tag="2")]
+    pub value: ::prost::alloc::vec::Vec<u8>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetUserMetadataRequest {
+    /// ID of the user under which the metadata gets set.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+    /// Metadata to bet set. The values have to be base64 encoded.
+    #[prost(message, repeated, tag="2")]
+    pub metadata: ::prost::alloc::vec::Vec<Metadata>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct SetUserMetadataResponse {
+    /// The timestamp of the update of the user metadata.
+    #[prost(message, optional, tag="1")]
+    pub set_date: ::core::option::Option<::pbjson_types::Timestamp>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListUserMetadataRequest {
+    /// ID of the user under which the metadata is to be listed.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+    /// List limitations and ordering.
+    #[prost(message, optional, tag="2")]
+    pub pagination: ::core::option::Option<super::super::filter::v2::PaginationRequest>,
+    /// Define the criteria to query for.
+    #[prost(message, repeated, tag="3")]
+    pub filters: ::prost::alloc::vec::Vec<super::super::metadata::v2::MetadataSearchFilter>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListUserMetadataResponse {
+    /// Pagination of the users metadata results.
+    #[prost(message, optional, tag="1")]
+    pub pagination: ::core::option::Option<super::super::filter::v2::PaginationResponse>,
+    /// The user metadata requested.
+    #[prost(message, repeated, tag="2")]
+    pub metadata: ::prost::alloc::vec::Vec<super::super::metadata::v2::Metadata>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeleteUserMetadataRequest {
+    /// ID of the user which metadata is to be deleted is stored on.
+    #[prost(string, tag="1")]
+    pub user_id: ::prost::alloc::string::String,
+    /// The keys for the user metadata to be deleted.
+    #[prost(string, repeated, tag="2")]
+    pub keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DeleteUserMetadataResponse {
+    /// The timestamp of the deletion of the user metadata.
+    #[prost(message, optional, tag="1")]
+    pub deletion_date: ::core::option::Option<::pbjson_types::Timestamp>,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]

@@ -1,14 +1,14 @@
 // @generated
 /// Generated client implementations.
-pub mod feature_service_client {
+pub mod action_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct FeatureServiceClient<T> {
+    pub struct ActionServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl FeatureServiceClient<tonic::transport::Channel> {
+    impl ActionServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -19,7 +19,7 @@ pub mod feature_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> FeatureServiceClient<T>
+    impl<T> ActionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -37,7 +37,7 @@ pub mod feature_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> FeatureServiceClient<InterceptedService<T, F>>
+        ) -> ActionServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -51,7 +51,7 @@ pub mod feature_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            FeatureServiceClient::new(InterceptedService::new(inner, interceptor))
+            ActionServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -84,11 +84,11 @@ pub mod feature_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn set_system_features(
+        pub async fn create_target(
             &mut self,
-            request: impl tonic::IntoRequest<super::SetSystemFeaturesRequest>,
+            request: impl tonic::IntoRequest<super::CreateTargetRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::SetSystemFeaturesResponse>,
+            tonic::Response<super::CreateTargetResponse>,
             tonic::Status,
         > {
             self.inner
@@ -102,23 +102,23 @@ pub mod feature_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/SetSystemFeatures",
+                "/zitadel.action.v2beta.ActionService/CreateTarget",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "SetSystemFeatures",
+                        "zitadel.action.v2beta.ActionService",
+                        "CreateTarget",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn reset_system_features(
+        pub async fn update_target(
             &mut self,
-            request: impl tonic::IntoRequest<super::ResetSystemFeaturesRequest>,
+            request: impl tonic::IntoRequest<super::UpdateTargetRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ResetSystemFeaturesResponse>,
+            tonic::Response<super::UpdateTargetResponse>,
             tonic::Status,
         > {
             self.inner
@@ -132,23 +132,23 @@ pub mod feature_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/ResetSystemFeatures",
+                "/zitadel.action.v2beta.ActionService/UpdateTarget",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "ResetSystemFeatures",
+                        "zitadel.action.v2beta.ActionService",
+                        "UpdateTarget",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn get_system_features(
+        pub async fn delete_target(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetSystemFeaturesRequest>,
+            request: impl tonic::IntoRequest<super::DeleteTargetRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetSystemFeaturesResponse>,
+            tonic::Response<super::DeleteTargetResponse>,
             tonic::Status,
         > {
             self.inner
@@ -162,23 +162,23 @@ pub mod feature_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/GetSystemFeatures",
+                "/zitadel.action.v2beta.ActionService/DeleteTarget",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "GetSystemFeatures",
+                        "zitadel.action.v2beta.ActionService",
+                        "DeleteTarget",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn set_instance_features(
+        pub async fn get_target(
             &mut self,
-            request: impl tonic::IntoRequest<super::SetInstanceFeaturesRequest>,
+            request: impl tonic::IntoRequest<super::GetTargetRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::SetInstanceFeaturesResponse>,
+            tonic::Response<super::GetTargetResponse>,
             tonic::Status,
         > {
             self.inner
@@ -192,30 +192,77 @@ pub mod feature_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/SetInstanceFeatures",
+                "/zitadel.action.v2beta.ActionService/GetTarget",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("zitadel.action.v2beta.ActionService", "GetTarget"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_targets(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListTargetsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListTargetsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.action.v2beta.ActionService/ListTargets",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("zitadel.action.v2beta.ActionService", "ListTargets"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn set_execution(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetExecutionRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SetExecutionResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.action.v2beta.ActionService/SetExecution",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "SetInstanceFeatures",
+                        "zitadel.action.v2beta.ActionService",
+                        "SetExecution",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        /** Reset Instance Features
-
- Deletes ALL configured features for an instance, reverting the behaviors to system defaults.
-
- Required permissions:
-  - iam.feature.delete
-*/
-        pub async fn reset_instance_features(
+        pub async fn list_executions(
             &mut self,
-            request: impl tonic::IntoRequest<super::ResetInstanceFeaturesRequest>,
+            request: impl tonic::IntoRequest<super::ListExecutionsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ResetInstanceFeaturesResponse>,
+            tonic::Response<super::ListExecutionsResponse>,
             tonic::Status,
         > {
             self.inner
@@ -229,30 +276,23 @@ pub mod feature_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/ResetInstanceFeatures",
+                "/zitadel.action.v2beta.ActionService/ListExecutions",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "ResetInstanceFeatures",
+                        "zitadel.action.v2beta.ActionService",
+                        "ListExecutions",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        /** Get Instance Features
-
- Returns all configured features for an instance. Unset fields mean the feature is the current system default.
-
- Required permissions:
-  - none
-*/
-        pub async fn get_instance_features(
+        pub async fn list_execution_functions(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetInstanceFeaturesRequest>,
+            request: impl tonic::IntoRequest<super::ListExecutionFunctionsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetInstanceFeaturesResponse>,
+            tonic::Response<super::ListExecutionFunctionsResponse>,
             tonic::Status,
         > {
             self.inner
@@ -266,30 +306,23 @@ pub mod feature_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/GetInstanceFeatures",
+                "/zitadel.action.v2beta.ActionService/ListExecutionFunctions",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "GetInstanceFeatures",
+                        "zitadel.action.v2beta.ActionService",
+                        "ListExecutionFunctions",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        /** Set Organization Features
-
- Configure and set features that apply to a complete instance. Only fields present in the request are set or unset.
-
- Required permissions:
-  - org.feature.write
-*/
-        pub async fn set_organization_features(
+        pub async fn list_execution_methods(
             &mut self,
-            request: impl tonic::IntoRequest<super::SetOrganizationFeaturesRequest>,
+            request: impl tonic::IntoRequest<super::ListExecutionMethodsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::SetOrganizationFeaturesResponse>,
+            tonic::Response<super::ListExecutionMethodsResponse>,
             tonic::Status,
         > {
             self.inner
@@ -303,30 +336,23 @@ pub mod feature_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/SetOrganizationFeatures",
+                "/zitadel.action.v2beta.ActionService/ListExecutionMethods",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "SetOrganizationFeatures",
+                        "zitadel.action.v2beta.ActionService",
+                        "ListExecutionMethods",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        /** Reset Organization Features
-
- Deletes ALL configured features for an organization, reverting the behaviors to instance defaults.
-
- Required permissions:
-  - org.feature.delete
-*/
-        pub async fn reset_organization_features(
+        pub async fn list_execution_services(
             &mut self,
-            request: impl tonic::IntoRequest<super::ResetOrganizationFeaturesRequest>,
+            request: impl tonic::IntoRequest<super::ListExecutionServicesRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::ResetOrganizationFeaturesResponse>,
+            tonic::Response<super::ListExecutionServicesResponse>,
             tonic::Status,
         > {
             self.inner
@@ -340,164 +366,14 @@ pub mod feature_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/ResetOrganizationFeatures",
+                "/zitadel.action.v2beta.ActionService/ListExecutionServices",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "ResetOrganizationFeatures",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        /** Get Organization Features
-
- Returns all configured features for an organization. Unset fields mean the feature is the current instance default.
-
- Required permissions:
-  - org.feature.read
-  - no permission required for the organization the user belongs to
-*/
-        pub async fn get_organization_features(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetOrganizationFeaturesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetOrganizationFeaturesResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/GetOrganizationFeatures",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "GetOrganizationFeatures",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        /** Set User Features
-
- Configure and set features that apply to an user. Only fields present in the request are set or unset.
-
- Required permissions:
-  - user.feature.write
-*/
-        pub async fn set_user_features(
-            &mut self,
-            request: impl tonic::IntoRequest<super::SetUserFeatureRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::SetUserFeaturesResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/SetUserFeatures",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "SetUserFeatures",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        /** Reset User Features
-
- Deletes ALL configured features for a user, reverting the behaviors to organization defaults.
-
- Required permissions:
-  - user.feature.delete
-*/
-        pub async fn reset_user_features(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ResetUserFeaturesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ResetUserFeaturesResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/ResetUserFeatures",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "ResetUserFeatures",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        /** Get User Features
-
- Returns all configured features for a user. Unset fields mean the feature is the current organization default.
-
- Required permissions:
-  - user.feature.read
-  - no permission required for the own user
-*/
-        pub async fn get_user_features(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetUserFeaturesRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetUserFeaturesResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.feature.v2.FeatureService/GetUserFeatures",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "zitadel.feature.v2.FeatureService",
-                        "GetUserFeatures",
+                        "zitadel.action.v2beta.ActionService",
+                        "ListExecutionServices",
                     ),
                 );
             self.inner.unary(req, path, codec).await

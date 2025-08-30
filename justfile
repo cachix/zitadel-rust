@@ -1,6 +1,6 @@
 proto_dir := "./crates/zitadel-gen/src/api/"
 gen_dir := "./crates/zitadel-gen"
-zitadel_proto_version := "v2.69.1"
+zitadel_proto_version := "v4.0.3"
 
 
 default: clean generate-grpc

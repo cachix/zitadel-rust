@@ -198,7 +198,7 @@ pub struct OtpFactor {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchQuery {
-    #[prost(oneof="search_query::Query", tags="1, 2, 3, 4, 5")]
+    #[prost(oneof="search_query::Query", tags="1, 2, 3, 4, 5, 6")]
     pub query: ::core::option::Option<search_query::Query>,
 }
 /// Nested message and enum types in `SearchQuery`.
@@ -216,6 +216,8 @@ pub mod search_query {
         CreatorQuery(super::CreatorQuery),
         #[prost(message, tag="5")]
         UserAgentQuery(super::UserAgentQuery),
+        #[prost(message, tag="6")]
+        ExpirationDateQuery(super::ExpirationDateQuery),
     }
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -253,6 +255,14 @@ pub struct UserAgentQuery {
     /// If the user agent is not available from the current token, an error will be returned.
     #[prost(string, optional, tag="1")]
     pub fingerprint_id: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct ExpirationDateQuery {
+    #[prost(message, optional, tag="1")]
+    pub expiration_date: ::core::option::Option<::pbjson_types::Timestamp>,
+    #[prost(enumeration="super::super::v1::TimestampQueryMethod", tag="2")]
+    pub method: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

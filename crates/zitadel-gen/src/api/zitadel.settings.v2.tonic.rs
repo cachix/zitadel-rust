@@ -174,8 +174,6 @@ pub mod settings_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /** Get the password complexity settings
-*/
         pub async fn get_password_complexity_settings(
             &mut self,
             request: impl tonic::IntoRequest<super::GetPasswordComplexitySettingsRequest>,
@@ -366,6 +364,8 @@ pub mod settings_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /** Get the security settings
+*/
         pub async fn get_security_settings(
             &mut self,
             request: impl tonic::IntoRequest<super::GetSecuritySettingsRequest>,
@@ -396,6 +396,8 @@ pub mod settings_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /** Set the security settings
+*/
         pub async fn set_security_settings(
             &mut self,
             request: impl tonic::IntoRequest<super::SetSecuritySettingsRequest>,
@@ -422,6 +424,88 @@ pub mod settings_service_client {
                     GrpcMethod::new(
                         "zitadel.settings.v2.SettingsService",
                         "SetSecuritySettings",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /** Get Hosted Login Translation
+
+ Returns the translations in the requested locale for the hosted login.
+ The translations returned are based on the input level specified (system, instance or organization).
+
+ If the requested level doesn't contain all translations, and ignore_inheritance is set to false,
+ a merging process fallbacks onto the higher levels ensuring all keys in the file have a translation,
+ which could be in the default language if the one of the locale is missing on all levels.
+
+ The etag returned in the response represents the hash of the translations as they are stored on DB
+ and its reliable only if ignore_inheritance = true.
+
+ Required permissions:
+   - `iam.policy.read`
+*/
+        pub async fn get_hosted_login_translation(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetHostedLoginTranslationRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetHostedLoginTranslationResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.settings.v2.SettingsService/GetHostedLoginTranslation",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "zitadel.settings.v2.SettingsService",
+                        "GetHostedLoginTranslation",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /** Set Hosted Login Translation
+
+ Sets the input translations at the specified level (instance or organization) for the input language.
+
+ Required permissions:
+   - `iam.policy.write`
+*/
+        pub async fn set_hosted_login_translation(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetHostedLoginTranslationRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SetHostedLoginTranslationResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.settings.v2.SettingsService/SetHostedLoginTranslation",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "zitadel.settings.v2.SettingsService",
+                        "SetHostedLoginTranslation",
                     ),
                 );
             self.inner.unary(req, path, codec).await

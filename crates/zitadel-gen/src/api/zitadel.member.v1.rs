@@ -78,4 +78,39 @@ pub struct UserIdQuery {
     #[prost(string, tag="1")]
     pub user_id: ::prost::alloc::string::String,
 }
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum MemberFieldColumnName {
+    MemberFieldNameUnspecified = 0,
+    MemberFieldNameUserId = 1,
+    MemberFieldNameCreationDate = 2,
+    MemberFieldNameChangeDate = 3,
+    MemberFieldNameUserResourceOwner = 4,
+}
+impl MemberFieldColumnName {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            MemberFieldColumnName::MemberFieldNameUnspecified => "MEMBER_FIELD_NAME_UNSPECIFIED",
+            MemberFieldColumnName::MemberFieldNameUserId => "MEMBER_FIELD_NAME_USER_ID",
+            MemberFieldColumnName::MemberFieldNameCreationDate => "MEMBER_FIELD_NAME_CREATION_DATE",
+            MemberFieldColumnName::MemberFieldNameChangeDate => "MEMBER_FIELD_NAME_CHANGE_DATE",
+            MemberFieldColumnName::MemberFieldNameUserResourceOwner => "MEMBER_FIELD_NAME_USER_RESOURCE_OWNER",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "MEMBER_FIELD_NAME_UNSPECIFIED" => Some(Self::MemberFieldNameUnspecified),
+            "MEMBER_FIELD_NAME_USER_ID" => Some(Self::MemberFieldNameUserId),
+            "MEMBER_FIELD_NAME_CREATION_DATE" => Some(Self::MemberFieldNameCreationDate),
+            "MEMBER_FIELD_NAME_CHANGE_DATE" => Some(Self::MemberFieldNameChangeDate),
+            "MEMBER_FIELD_NAME_USER_RESOURCE_OWNER" => Some(Self::MemberFieldNameUserResourceOwner),
+            _ => None,
+        }
+    }
+}
 // @@protoc_insertion_point(module)

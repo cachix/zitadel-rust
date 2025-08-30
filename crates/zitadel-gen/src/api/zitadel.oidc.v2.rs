@@ -34,6 +34,25 @@ pub struct AuthorizationError {
     #[prost(string, optional, tag="3")]
     pub error_uri: ::core::option::Option<::prost::alloc::string::String>,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeviceAuthorizationRequest {
+    /// The unique identifier of the device authorization request to be used for authorizing or denying the request.
+    #[prost(string, tag="1")]
+    pub id: ::prost::alloc::string::String,
+    /// The client_id of the application that initiated the device authorization request.
+    #[prost(string, tag="2")]
+    pub client_id: ::prost::alloc::string::String,
+    /// The scopes requested by the application.
+    #[prost(string, repeated, tag="3")]
+    pub scope: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Name of the client application.
+    #[prost(string, tag="4")]
+    pub app_name: ::prost::alloc::string::String,
+    /// Name of the project the client application is part of.
+    #[prost(string, tag="5")]
+    pub project_name: ::prost::alloc::string::String,
+}
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
 pub enum Prompt {
@@ -191,6 +210,51 @@ pub struct CreateCallbackResponse {
     pub details: ::core::option::Option<super::super::object::v2::Details>,
     #[prost(string, tag="2")]
     pub callback_url: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDeviceAuthorizationRequestRequest {
+    /// The user_code returned by the device authorization request and provided to the user by the device.
+    #[prost(string, tag="1")]
+    pub user_code: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDeviceAuthorizationRequestResponse {
+    #[prost(message, optional, tag="1")]
+    pub device_authorization_request: ::core::option::Option<DeviceAuthorizationRequest>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AuthorizeOrDenyDeviceAuthorizationRequest {
+    /// The device authorization id returned when submitting the user code.
+    #[prost(string, tag="1")]
+    pub device_authorization_id: ::prost::alloc::string::String,
+    /// The decision of the user to authorize or deny the device authorization request.
+    #[prost(oneof="authorize_or_deny_device_authorization_request::Decision", tags="2, 3")]
+    pub decision: ::core::option::Option<authorize_or_deny_device_authorization_request::Decision>,
+}
+/// Nested message and enum types in `AuthorizeOrDenyDeviceAuthorizationRequest`.
+pub mod authorize_or_deny_device_authorization_request {
+    /// The decision of the user to authorize or deny the device authorization request.
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Decision {
+        /// To authorize the device authorization request, the user's session must be provided.
+        #[prost(message, tag="2")]
+        Session(super::Session),
+        /// Deny the device authorization request.
+        #[prost(message, tag="3")]
+        Deny(super::Deny),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct Deny {
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct AuthorizeOrDenyDeviceAuthorizationResponse {
 }
 include!("zitadel.oidc.v2.tonic.rs");
 // @@protoc_insertion_point(module)

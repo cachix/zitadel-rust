@@ -64,12 +64,9 @@ impl Source {
 #[repr(i32)]
 pub enum ImprovedPerformance {
     Unspecified = 0,
-    /// Uses the eventstore to query the org by id
-    /// instead of the sql table.
-    OrgById = 1,
     /// Improves performance on write side by using
     /// optimized processes to query data to determine
-    /// correctnes of data.
+    /// correctness of data.
     ProjectGrant = 2,
     Project = 3,
     UserGrant = 4,
@@ -86,7 +83,6 @@ impl ImprovedPerformance {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             ImprovedPerformance::Unspecified => "IMPROVED_PERFORMANCE_UNSPECIFIED",
-            ImprovedPerformance::OrgById => "IMPROVED_PERFORMANCE_ORG_BY_ID",
             ImprovedPerformance::ProjectGrant => "IMPROVED_PERFORMANCE_PROJECT_GRANT",
             ImprovedPerformance::Project => "IMPROVED_PERFORMANCE_PROJECT",
             ImprovedPerformance::UserGrant => "IMPROVED_PERFORMANCE_USER_GRANT",
@@ -97,7 +93,6 @@ impl ImprovedPerformance {
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "IMPROVED_PERFORMANCE_UNSPECIFIED" => Some(Self::Unspecified),
-            "IMPROVED_PERFORMANCE_ORG_BY_ID" => Some(Self::OrgById),
             "IMPROVED_PERFORMANCE_PROJECT_GRANT" => Some(Self::ProjectGrant),
             "IMPROVED_PERFORMANCE_PROJECT" => Some(Self::Project),
             "IMPROVED_PERFORMANCE_USER_GRANT" => Some(Self::UserGrant),
@@ -111,16 +106,10 @@ impl ImprovedPerformance {
 pub struct SetSystemFeaturesRequest {
     #[prost(bool, optional, tag="1")]
     pub login_default_org: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag="2")]
-    pub oidc_trigger_introspection_projections: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag="3")]
-    pub oidc_legacy_introspection: ::core::option::Option<bool>,
     #[prost(bool, optional, tag="4")]
     pub user_schema: ::core::option::Option<bool>,
     #[prost(bool, optional, tag="5")]
     pub oidc_token_exchange: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag="6")]
-    pub actions: ::core::option::Option<bool>,
     #[prost(enumeration="ImprovedPerformance", repeated, packed="false", tag="7")]
     pub improved_performance: ::prost::alloc::vec::Vec<i32>,
     #[prost(bool, optional, tag="8")]
@@ -153,16 +142,10 @@ pub struct GetSystemFeaturesResponse {
     pub details: ::core::option::Option<super::super::object::v2beta::Details>,
     #[prost(message, optional, tag="2")]
     pub login_default_org: ::core::option::Option<FeatureFlag>,
-    #[prost(message, optional, tag="3")]
-    pub oidc_trigger_introspection_projections: ::core::option::Option<FeatureFlag>,
-    #[prost(message, optional, tag="4")]
-    pub oidc_legacy_introspection: ::core::option::Option<FeatureFlag>,
     #[prost(message, optional, tag="5")]
     pub user_schema: ::core::option::Option<FeatureFlag>,
     #[prost(message, optional, tag="6")]
     pub oidc_token_exchange: ::core::option::Option<FeatureFlag>,
-    #[prost(message, optional, tag="7")]
-    pub actions: ::core::option::Option<FeatureFlag>,
     #[prost(message, optional, tag="8")]
     pub improved_performance: ::core::option::Option<ImprovedPerformanceFeatureFlag>,
     #[prost(message, optional, tag="9")]
@@ -173,20 +156,12 @@ pub struct GetSystemFeaturesResponse {
 pub struct SetInstanceFeaturesRequest {
     #[prost(bool, optional, tag="1")]
     pub login_default_org: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag="2")]
-    pub oidc_trigger_introspection_projections: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag="3")]
-    pub oidc_legacy_introspection: ::core::option::Option<bool>,
     #[prost(bool, optional, tag="4")]
     pub user_schema: ::core::option::Option<bool>,
     #[prost(bool, optional, tag="5")]
     pub oidc_token_exchange: ::core::option::Option<bool>,
-    #[prost(bool, optional, tag="6")]
-    pub actions: ::core::option::Option<bool>,
     #[prost(enumeration="ImprovedPerformance", repeated, packed="false", tag="7")]
     pub improved_performance: ::prost::alloc::vec::Vec<i32>,
-    #[prost(bool, optional, tag="8")]
-    pub web_key: ::core::option::Option<bool>,
     #[prost(bool, optional, tag="9")]
     pub debug_oidc_parent_error: ::core::option::Option<bool>,
     #[prost(bool, optional, tag="10")]
@@ -221,20 +196,12 @@ pub struct GetInstanceFeaturesResponse {
     pub details: ::core::option::Option<super::super::object::v2beta::Details>,
     #[prost(message, optional, tag="2")]
     pub login_default_org: ::core::option::Option<FeatureFlag>,
-    #[prost(message, optional, tag="3")]
-    pub oidc_trigger_introspection_projections: ::core::option::Option<FeatureFlag>,
-    #[prost(message, optional, tag="4")]
-    pub oidc_legacy_introspection: ::core::option::Option<FeatureFlag>,
     #[prost(message, optional, tag="5")]
     pub user_schema: ::core::option::Option<FeatureFlag>,
     #[prost(message, optional, tag="6")]
     pub oidc_token_exchange: ::core::option::Option<FeatureFlag>,
-    #[prost(message, optional, tag="7")]
-    pub actions: ::core::option::Option<FeatureFlag>,
     #[prost(message, optional, tag="8")]
     pub improved_performance: ::core::option::Option<ImprovedPerformanceFeatureFlag>,
-    #[prost(message, optional, tag="9")]
-    pub web_key: ::core::option::Option<FeatureFlag>,
     #[prost(message, optional, tag="10")]
     pub debug_oidc_parent_error: ::core::option::Option<FeatureFlag>,
     #[prost(message, optional, tag="11")]

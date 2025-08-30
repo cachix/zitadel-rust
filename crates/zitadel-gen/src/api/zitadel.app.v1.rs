@@ -99,6 +99,8 @@ pub struct OidcConfig {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SamlConfig {
+    #[prost(message, optional, tag="3")]
+    pub login_version: ::core::option::Option<LoginVersion>,
     #[prost(oneof="saml_config::Metadata", tags="1, 2")]
     pub metadata: ::core::option::Option<saml_config::Metadata>,
 }

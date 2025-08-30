@@ -84,6 +84,31 @@ pub mod user_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
+        pub async fn create_user(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateUserRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CreateUserResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/CreateUser",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("zitadel.user.v2.UserService", "CreateUser"));
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn add_human_user(
             &mut self,
             request: impl tonic::IntoRequest<super::AddHumanUserRequest>,
@@ -361,6 +386,31 @@ pub mod user_service_client {
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("zitadel.user.v2.UserService", "VerifyPhone"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn update_user(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateUserRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UpdateUserResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/UpdateUser",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("zitadel.user.v2.UserService", "UpdateUser"));
             self.inner.unary(req, path, codec).await
         }
         pub async fn update_human_user(
@@ -1105,6 +1155,218 @@ pub mod user_service_client {
                 .insert(GrpcMethod::new("zitadel.user.v2.UserService", "SetPassword"));
             self.inner.unary(req, path, codec).await
         }
+        pub async fn add_secret(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AddSecretRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddSecretResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/AddSecret",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("zitadel.user.v2.UserService", "AddSecret"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn remove_secret(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RemoveSecretRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveSecretResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/RemoveSecret",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("zitadel.user.v2.UserService", "RemoveSecret"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn add_key(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AddKeyRequest>,
+        ) -> std::result::Result<tonic::Response<super::AddKeyResponse>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/AddKey",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("zitadel.user.v2.UserService", "AddKey"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn remove_key(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RemoveKeyRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveKeyResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/RemoveKey",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("zitadel.user.v2.UserService", "RemoveKey"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_keys(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListKeysRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListKeysResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/ListKeys",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("zitadel.user.v2.UserService", "ListKeys"));
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn add_personal_access_token(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AddPersonalAccessTokenRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddPersonalAccessTokenResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/AddPersonalAccessToken",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "zitadel.user.v2.UserService",
+                        "AddPersonalAccessToken",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn remove_personal_access_token(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RemovePersonalAccessTokenRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemovePersonalAccessTokenResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/RemovePersonalAccessToken",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "zitadel.user.v2.UserService",
+                        "RemovePersonalAccessToken",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_personal_access_tokens(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListPersonalAccessTokensRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListPersonalAccessTokensResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/ListPersonalAccessTokens",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "zitadel.user.v2.UserService",
+                        "ListPersonalAccessTokens",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         pub async fn list_authentication_method_types(
             &mut self,
             request: impl tonic::IntoRequest<super::ListAuthenticationMethodTypesRequest>,
@@ -1270,6 +1532,87 @@ pub mod user_service_client {
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new("zitadel.user.v2.UserService", "HumanMFAInitSkipped"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn set_user_metadata(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetUserMetadataRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SetUserMetadataResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/SetUserMetadata",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("zitadel.user.v2.UserService", "SetUserMetadata"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_user_metadata(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListUserMetadataRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListUserMetadataResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/ListUserMetadata",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("zitadel.user.v2.UserService", "ListUserMetadata"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn delete_user_metadata(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteUserMetadataRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::DeleteUserMetadataResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.user.v2.UserService/DeleteUserMetadata",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("zitadel.user.v2.UserService", "DeleteUserMetadata"),
                 );
             self.inner.unary(req, path, codec).await
         }

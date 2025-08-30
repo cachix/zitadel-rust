@@ -2321,36 +2321,6 @@ pub mod management_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn list_org_domains(
-            &mut self,
-            request: impl tonic::IntoRequest<super::ListOrgDomainsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::ListOrgDomainsResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.management.v1.ManagementService/ListOrgDomains",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "zitadel.management.v1.ManagementService",
-                        "ListOrgDomains",
-                    ),
-                );
-            self.inner.unary(req, path, codec).await
-        }
         pub async fn add_org_domain(
             &mut self,
             request: impl tonic::IntoRequest<super::AddOrgDomainRequest>,
@@ -2377,6 +2347,36 @@ pub mod management_service_client {
                     GrpcMethod::new(
                         "zitadel.management.v1.ManagementService",
                         "AddOrgDomain",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn list_org_domains(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ListOrgDomainsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ListOrgDomainsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.management.v1.ManagementService/ListOrgDomains",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "zitadel.management.v1.ManagementService",
+                        "ListOrgDomains",
                     ),
                 );
             self.inner.unary(req, path, codec).await

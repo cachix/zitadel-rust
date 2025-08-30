@@ -82,6 +82,9 @@ pub struct Details {
     /// resource_owner is the organization or instance_id an object belongs to
     #[prost(string, tag="3")]
     pub resource_owner: ::prost::alloc::string::String,
+    /// creation_date is the timestamp where the first operation on the object was made
+    #[prost(message, optional, tag="4")]
+    pub creation_date: ::core::option::Option<::pbjson_types::Timestamp>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]

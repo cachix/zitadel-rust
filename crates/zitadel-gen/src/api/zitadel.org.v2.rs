@@ -144,6 +144,9 @@ pub struct AddOrganizationRequest {
     pub name: ::prost::alloc::string::String,
     #[prost(message, repeated, tag="2")]
     pub admins: ::prost::alloc::vec::Vec<add_organization_request::Admin>,
+    /// optionally set your own id unique for the organization.
+    #[prost(string, optional, tag="3")]
+    pub org_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Nested message and enum types in `AddOrganizationRequest`.
 pub mod add_organization_request {

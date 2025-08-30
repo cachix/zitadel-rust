@@ -243,6 +243,8 @@ pub struct DataHumanUser {
     pub user_id: ::prost::alloc::string::String,
     #[prost(message, optional, tag="2")]
     pub user: ::core::option::Option<super::super::management::v1::ImportHumanUserRequest>,
+    #[prost(enumeration="super::super::user::v1::UserState", tag="3")]
+    pub state: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -251,6 +253,8 @@ pub struct DataMachineUser {
     pub user_id: ::prost::alloc::string::String,
     #[prost(message, optional, tag="2")]
     pub user: ::core::option::Option<super::super::management::v1::AddMachineUserRequest>,
+    #[prost(enumeration="super::super::user::v1::UserState", tag="3")]
+    pub state: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

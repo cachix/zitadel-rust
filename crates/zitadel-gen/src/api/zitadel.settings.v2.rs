@@ -560,5 +560,66 @@ pub struct SetSecuritySettingsResponse {
     #[prost(message, optional, tag="1")]
     pub details: ::core::option::Option<super::super::object::v2::Details>,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetHostedLoginTranslationRequest {
+    #[prost(string, tag="4")]
+    pub locale: ::prost::alloc::string::String,
+    /// if set to true, higher levels are ignored, if false higher levels are merged into the file
+    #[prost(bool, tag="5")]
+    pub ignore_inheritance: bool,
+    #[prost(oneof="get_hosted_login_translation_request::Level", tags="1, 2, 3")]
+    pub level: ::core::option::Option<get_hosted_login_translation_request::Level>,
+}
+/// Nested message and enum types in `GetHostedLoginTranslationRequest`.
+pub mod get_hosted_login_translation_request {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Level {
+        #[prost(bool, tag="1")]
+        System(bool),
+        #[prost(bool, tag="2")]
+        Instance(bool),
+        #[prost(string, tag="3")]
+        OrganizationId(::prost::alloc::string::String),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetHostedLoginTranslationResponse {
+    /// hash of the payload
+    #[prost(string, tag="1")]
+    pub etag: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="2")]
+    pub translations: ::core::option::Option<::pbjson_types::Struct>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetHostedLoginTranslationRequest {
+    #[prost(string, tag="3")]
+    pub locale: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="4")]
+    pub translations: ::core::option::Option<::pbjson_types::Struct>,
+    #[prost(oneof="set_hosted_login_translation_request::Level", tags="1, 2")]
+    pub level: ::core::option::Option<set_hosted_login_translation_request::Level>,
+}
+/// Nested message and enum types in `SetHostedLoginTranslationRequest`.
+pub mod set_hosted_login_translation_request {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Level {
+        #[prost(bool, tag="1")]
+        Instance(bool),
+        #[prost(string, tag="2")]
+        OrganizationId(::prost::alloc::string::String),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetHostedLoginTranslationResponse {
+    /// hash of the saved translation. Valid only when ignore_inheritance = true
+    #[prost(string, tag="1")]
+    pub etag: ::prost::alloc::string::String,
+}
 include!("zitadel.settings.v2.tonic.rs");
 // @@protoc_insertion_point(module)

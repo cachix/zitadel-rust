@@ -1874,6 +1874,8 @@ pub struct AddSamlAppRequest {
     pub project_id: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub name: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="5")]
+    pub login_version: ::core::option::Option<super::super::app::v1::LoginVersion>,
     #[prost(oneof="add_saml_app_request::Metadata", tags="3, 4")]
     pub metadata: ::core::option::Option<add_saml_app_request::Metadata>,
 }
@@ -1987,6 +1989,8 @@ pub struct UpdateSamlAppConfigRequest {
     pub project_id: ::prost::alloc::string::String,
     #[prost(string, tag="2")]
     pub app_id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag="5")]
+    pub login_version: ::core::option::Option<super::super::app::v1::LoginVersion>,
     #[prost(oneof="update_saml_app_config_request::Metadata", tags="3, 4")]
     pub metadata: ::core::option::Option<update_saml_app_config_request::Metadata>,
 }
@@ -4331,6 +4335,9 @@ pub struct AddGenericOAuthProviderRequest {
     pub id_attribute: ::prost::alloc::string::String,
     #[prost(message, optional, tag="9")]
     pub provider_options: ::core::option::Option<super::super::idp::v1::Options>,
+    /// Enable the use of Proof Key for Code Exchange (PKCE) for the OAuth2 flow.
+    #[prost(bool, tag="10")]
+    pub use_pkce: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4365,6 +4372,9 @@ pub struct UpdateGenericOAuthProviderRequest {
     pub id_attribute: ::prost::alloc::string::String,
     #[prost(message, optional, tag="10")]
     pub provider_options: ::core::option::Option<super::super::idp::v1::Options>,
+    /// Enable the use of Proof Key for Code Exchange (PKCE) for the OAuth2 flow.
+    #[prost(bool, tag="11")]
+    pub use_pkce: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4389,6 +4399,9 @@ pub struct AddGenericOidcProviderRequest {
     pub provider_options: ::core::option::Option<super::super::idp::v1::Options>,
     #[prost(bool, tag="7")]
     pub is_id_token_mapping: bool,
+    /// Enable the use of Proof Key for Code Exchange (PKCE) for the OIDC flow.
+    #[prost(bool, tag="8")]
+    pub use_pkce: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4418,6 +4431,9 @@ pub struct UpdateGenericOidcProviderRequest {
     pub provider_options: ::core::option::Option<super::super::idp::v1::Options>,
     #[prost(bool, tag="8")]
     pub is_id_token_mapping: bool,
+    /// Enable the use of Proof Key for Code Exchange (PKCE) for the OIDC flow.
+    #[prost(bool, tag="9")]
+    pub use_pkce: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4824,6 +4840,9 @@ pub struct AddLdapProviderRequest {
     pub attributes: ::core::option::Option<super::super::idp::v1::LdapAttributes>,
     #[prost(message, optional, tag="12")]
     pub provider_options: ::core::option::Option<super::super::idp::v1::Options>,
+    /// Root_ca is for self signing certificates for TLS connections to LDAP servers it is intended to be filled with a .pem file.
+    #[prost(bytes="vec", tag="13")]
+    pub root_ca: ::prost::alloc::vec::Vec<u8>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4862,6 +4881,9 @@ pub struct UpdateLdapProviderRequest {
     pub attributes: ::core::option::Option<super::super::idp::v1::LdapAttributes>,
     #[prost(message, optional, tag="13")]
     pub provider_options: ::core::option::Option<super::super::idp::v1::Options>,
+    /// Root_ca is for self signing certificates for TLS connections to LDAP servers it is intended to be filled with a .pem file.
+    #[prost(bytes="vec", tag="14")]
+    pub root_ca: ::prost::alloc::vec::Vec<u8>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -4889,6 +4911,10 @@ pub struct AddSamlProviderRequest {
     /// in case the nameid-format returned is `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`.
     #[prost(string, optional, tag="8")]
     pub transient_mapping_attribute_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Optionally enable federated logout. If enabled, ZITADEL will send a logout request to the identity provider,
+    /// if the user terminates the session in ZITADEL. Be sure to provide a SLO endpoint as part of the metadata.
+    #[prost(bool, optional, tag="9")]
+    pub federated_logout_enabled: ::core::option::Option<bool>,
     #[prost(oneof="add_saml_provider_request::Metadata", tags="2, 3")]
     pub metadata: ::core::option::Option<add_saml_provider_request::Metadata>,
 }
@@ -4935,6 +4961,10 @@ pub struct UpdateSamlProviderRequest {
     /// in case the nameid-format returned is `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`.
     #[prost(string, optional, tag="9")]
     pub transient_mapping_attribute_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Optionally enable federated logout. If enabled, ZITADEL will send a logout request to the identity provider,
+    /// if the user terminates the session in ZITADEL. Be sure to provide a SLO endpoint as part of the metadata.
+    #[prost(bool, optional, tag="10")]
+    pub federated_logout_enabled: ::core::option::Option<bool>,
     /// Metadata of the SAML identity provider.
     #[prost(oneof="update_saml_provider_request::Metadata", tags="3, 4")]
     pub metadata: ::core::option::Option<update_saml_provider_request::Metadata>,
@@ -5227,11 +5257,11 @@ pub struct SetTriggerActionsRequest {
     /// - External Authentication:
     ///    - Post Authentication: TRIGGER_TYPE_POST_AUTHENTICATION or 1
     ///    - Pre Creation: TRIGGER_TYPE_PRE_CREATION or 2
-    ///    - Post Creation: TRIGGER_TYPE_POST_CREATION or 3 
+    ///    - Post Creation: TRIGGER_TYPE_POST_CREATION or 3
     /// - Internal Authentication:
     ///    - Post Authentication: TRIGGER_TYPE_POST_AUTHENTICATION or 1
     ///    - Pre Creation: TRIGGER_TYPE_PRE_CREATION or 2
-    ///    - Post Creation: TRIGGER_TYPE_POST_CREATION or 3 
+    ///    - Post Creation: TRIGGER_TYPE_POST_CREATION or 3
     /// - Complement Token:
     ///    - Pre Userinfo Creation: 4
     ///    - Pre Access Token Creation: 5

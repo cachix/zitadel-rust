@@ -175,6 +175,9 @@ pub struct OAuthConfig {
     pub scopes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(string, tag="6")]
     pub id_attribute: ::prost::alloc::string::String,
+    /// Defines if the Proof Key for Code Exchange (PKCE) is used for the authorization code flow.
+    #[prost(bool, tag="7")]
+    pub use_pkce: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -187,6 +190,9 @@ pub struct GenericOidcConfig {
     pub scopes: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     #[prost(bool, tag="4")]
     pub is_id_token_mapping: bool,
+    /// Defines if the Proof Key for Code Exchange (PKCE) is used for the authorization code flow.
+    #[prost(bool, tag="5")]
+    pub use_pkce: bool,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -257,6 +263,8 @@ pub struct LdapConfig {
     pub timeout: ::core::option::Option<::pbjson_types::Duration>,
     #[prost(message, optional, tag="9")]
     pub attributes: ::core::option::Option<LdapAttributes>,
+    #[prost(bytes="vec", tag="10")]
+    pub root_ca: ::prost::alloc::vec::Vec<u8>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -277,6 +285,10 @@ pub struct SamlConfig {
     /// in case the nameid-format returned is `urn:oasis:names:tc:SAML:2.0:nameid-format:transient`.
     #[prost(string, optional, tag="5")]
     pub transient_mapping_attribute_name: ::core::option::Option<::prost::alloc::string::String>,
+    /// Boolean weather federated logout is enabled. If enabled, ZITADEL will send a logout request to the identity provider,
+    /// if the user terminates the session in ZITADEL. Be sure to provide a SLO endpoint as part of the metadata.
+    #[prost(bool, optional, tag="6")]
+    pub federated_logout_enabled: ::core::option::Option<bool>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

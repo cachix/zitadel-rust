@@ -7,6 +7,18 @@ pub mod zitadel {
             include!("zitadel.action.v1.rs");
             // @@protoc_insertion_point(zitadel.action.v1)
         }
+        #[cfg(feature = "zitadel-action-v2")]
+        // @@protoc_insertion_point(attribute:zitadel.action.v2)
+        pub mod v2 {
+            include!("zitadel.action.v2.rs");
+            // @@protoc_insertion_point(zitadel.action.v2)
+        }
+        #[cfg(feature = "zitadel-action-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.action.v2beta)
+        pub mod v2beta {
+            include!("zitadel.action.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.action.v2beta)
+        }
     }
     pub mod admin {
         #[cfg(feature = "zitadel-admin-v1")]
@@ -16,12 +28,26 @@ pub mod zitadel {
             // @@protoc_insertion_point(zitadel.admin.v1)
         }
     }
+    pub mod analytics {
+        #[cfg(feature = "zitadel-analytics-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.analytics.v2beta)
+        pub mod v2beta {
+            include!("zitadel.analytics.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.analytics.v2beta)
+        }
+    }
     pub mod app {
         #[cfg(feature = "zitadel-app-v1")]
         // @@protoc_insertion_point(attribute:zitadel.app.v1)
         pub mod v1 {
             include!("zitadel.app.v1.rs");
             // @@protoc_insertion_point(zitadel.app.v1)
+        }
+        #[cfg(feature = "zitadel-app-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.app.v2beta)
+        pub mod v2beta {
+            include!("zitadel.app.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.app.v2beta)
         }
     }
     pub mod auth {
@@ -38,6 +64,14 @@ pub mod zitadel {
         pub mod v1 {
             include!("zitadel.authn.v1.rs");
             // @@protoc_insertion_point(zitadel.authn.v1)
+        }
+    }
+    pub mod authorization {
+        #[cfg(feature = "zitadel-authorization-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.authorization.v2beta)
+        pub mod v2beta {
+            include!("zitadel.authorization.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.authorization.v2beta)
         }
     }
     pub mod change {
@@ -76,6 +110,20 @@ pub mod zitadel {
             // @@protoc_insertion_point(zitadel.feature.v2beta)
         }
     }
+    pub mod filter {
+        #[cfg(feature = "zitadel-filter-v2")]
+        // @@protoc_insertion_point(attribute:zitadel.filter.v2)
+        pub mod v2 {
+            include!("zitadel.filter.v2.rs");
+            // @@protoc_insertion_point(zitadel.filter.v2)
+        }
+        #[cfg(feature = "zitadel-filter-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.filter.v2beta)
+        pub mod v2beta {
+            include!("zitadel.filter.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.filter.v2beta)
+        }
+    }
     pub mod idp {
         #[cfg(feature = "zitadel-idp-v1")]
         // @@protoc_insertion_point(attribute:zitadel.idp.v1)
@@ -96,6 +144,20 @@ pub mod zitadel {
         pub mod v1 {
             include!("zitadel.instance.v1.rs");
             // @@protoc_insertion_point(zitadel.instance.v1)
+        }
+        #[cfg(feature = "zitadel-instance-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.instance.v2beta)
+        pub mod v2beta {
+            include!("zitadel.instance.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.instance.v2beta)
+        }
+    }
+    pub mod internal_permission {
+        #[cfg(feature = "zitadel-internal_permission-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.internal_permission.v2beta)
+        pub mod v2beta {
+            include!("zitadel.internal_permission.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.internal_permission.v2beta)
         }
     }
     pub mod management {
@@ -120,6 +182,18 @@ pub mod zitadel {
         pub mod v1 {
             include!("zitadel.metadata.v1.rs");
             // @@protoc_insertion_point(zitadel.metadata.v1)
+        }
+        #[cfg(feature = "zitadel-metadata-v2")]
+        // @@protoc_insertion_point(attribute:zitadel.metadata.v2)
+        pub mod v2 {
+            include!("zitadel.metadata.v2.rs");
+            // @@protoc_insertion_point(zitadel.metadata.v2)
+        }
+        #[cfg(feature = "zitadel-metadata-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.metadata.v2beta)
+        pub mod v2beta {
+            include!("zitadel.metadata.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.metadata.v2beta)
         }
     }
     pub mod milestone {
@@ -199,6 +273,12 @@ pub mod zitadel {
             include!("zitadel.project.v1.rs");
             // @@protoc_insertion_point(zitadel.project.v1)
         }
+        #[cfg(feature = "zitadel-project-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.project.v2beta)
+        pub mod v2beta {
+            include!("zitadel.project.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.project.v2beta)
+        }
     }
     pub mod protoc_gen_zitadel {
         #[cfg(feature = "zitadel-protoc_gen_zitadel-v2")]
@@ -217,14 +297,6 @@ pub mod zitadel {
         }
     }
     pub mod resources {
-        pub mod action {
-            #[cfg(feature = "zitadel-resources-action-v3alpha")]
-            // @@protoc_insertion_point(attribute:zitadel.resources.action.v3alpha)
-            pub mod v3alpha {
-                include!("zitadel.resources.action.v3alpha.rs");
-                // @@protoc_insertion_point(zitadel.resources.action.v3alpha)
-            }
-        }
         pub mod debug_events {
             #[cfg(feature = "zitadel-resources-debug_events-v3alpha")]
             // @@protoc_insertion_point(attribute:zitadel.resources.debug_events.v3alpha)
@@ -255,14 +327,6 @@ pub mod zitadel {
             pub mod v3alpha {
                 include!("zitadel.resources.userschema.v3alpha.rs");
                 // @@protoc_insertion_point(zitadel.resources.userschema.v3alpha)
-            }
-        }
-        pub mod webkey {
-            #[cfg(feature = "zitadel-resources-webkey-v3alpha")]
-            // @@protoc_insertion_point(attribute:zitadel.resources.webkey.v3alpha)
-            pub mod v3alpha {
-                include!("zitadel.resources.webkey.v3alpha.rs");
-                // @@protoc_insertion_point(zitadel.resources.webkey.v3alpha)
             }
         }
     }
@@ -362,6 +426,20 @@ pub mod zitadel {
         pub mod v1 {
             include!("zitadel.v1.v1.rs");
             // @@protoc_insertion_point(zitadel.v1.v1)
+        }
+    }
+    pub mod webkey {
+        #[cfg(feature = "zitadel-webkey-v2")]
+        // @@protoc_insertion_point(attribute:zitadel.webkey.v2)
+        pub mod v2 {
+            include!("zitadel.webkey.v2.rs");
+            // @@protoc_insertion_point(zitadel.webkey.v2)
+        }
+        #[cfg(feature = "zitadel-webkey-v2beta")]
+        // @@protoc_insertion_point(attribute:zitadel.webkey.v2beta)
+        pub mod v2beta {
+            include!("zitadel.webkey.v2beta.rs");
+            // @@protoc_insertion_point(zitadel.webkey.v2beta)
         }
     }
 }

@@ -239,6 +239,8 @@ pub struct ListIamMembersRequest {
     pub instance_id: ::prost::alloc::string::String,
     #[prost(message, repeated, tag="3")]
     pub queries: ::prost::alloc::vec::Vec<super::super::member::v1::SearchQuery>,
+    #[prost(enumeration="super::super::member::v1::MemberFieldColumnName", tag="4")]
+    pub sorting_column: i32,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

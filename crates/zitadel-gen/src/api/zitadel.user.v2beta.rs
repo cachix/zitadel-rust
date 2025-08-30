@@ -173,6 +173,19 @@ pub struct IdpLink {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FormData {
+    /// The URL to which the form should be submitted using the POST method.
+    #[prost(string, tag="1")]
+    pub url: ::prost::alloc::string::String,
+    /// The form fields to be submitted.
+    /// Each field is represented as a key-value pair, where the key is the field / input name
+    /// and the value is the field / input value.
+    /// All fields need to be submitted as is and as input type "text".
+    #[prost(map="string, string", tag="2")]
+    pub fields: ::std::collections::HashMap<::prost::alloc::string::String, ::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Password {
     #[prost(string, tag="1")]
     pub password: ::prost::alloc::string::String,
@@ -1320,7 +1333,7 @@ pub mod start_identity_provider_intent_request {
 pub struct StartIdentityProviderIntentResponse {
     #[prost(message, optional, tag="1")]
     pub details: ::core::option::Option<super::super::object::v2beta::Details>,
-    #[prost(oneof="start_identity_provider_intent_response::NextStep", tags="2, 3, 4")]
+    #[prost(oneof="start_identity_provider_intent_response::NextStep", tags="2, 3, 4, 5")]
     pub next_step: ::core::option::Option<start_identity_provider_intent_response::NextStep>,
 }
 /// Nested message and enum types in `StartIdentityProviderIntentResponse`.
@@ -1328,12 +1341,19 @@ pub mod start_identity_provider_intent_response {
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum NextStep {
+        /// URL to which the client should redirect
         #[prost(string, tag="2")]
         AuthUrl(::prost::alloc::string::String),
+        /// IDP Intent information
         #[prost(message, tag="3")]
         IdpIntent(super::IdpIntent),
+        /// POST call information
+        /// Deprecated: Use form_data instead
         #[prost(bytes, tag="4")]
         PostForm(::prost::alloc::vec::Vec<u8>),
+        /// Data for a form POST call
+        #[prost(message, tag="5")]
+        FormData(super::FormData),
     }
 }
 #[allow(clippy::derive_partial_eq_without_eq)]

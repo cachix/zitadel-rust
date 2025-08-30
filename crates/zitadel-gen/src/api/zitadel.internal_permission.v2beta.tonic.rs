@@ -1,14 +1,14 @@
 // @generated
 /// Generated client implementations.
-pub mod oidc_service_client {
+pub mod internal_permission_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     #[derive(Debug, Clone)]
-    pub struct OidcServiceClient<T> {
+    pub struct InternalPermissionServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl OidcServiceClient<tonic::transport::Channel> {
+    impl InternalPermissionServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -19,7 +19,7 @@ pub mod oidc_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> OidcServiceClient<T>
+    impl<T> InternalPermissionServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -37,7 +37,7 @@ pub mod oidc_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> OidcServiceClient<InterceptedService<T, F>>
+        ) -> InternalPermissionServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -51,7 +51,9 @@ pub mod oidc_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            OidcServiceClient::new(InterceptedService::new(inner, interceptor))
+            InternalPermissionServiceClient::new(
+                InterceptedService::new(inner, interceptor),
+            )
         }
         /// Compress requests with the given encoding.
         ///
@@ -84,11 +86,11 @@ pub mod oidc_service_client {
             self.inner = self.inner.max_encoding_message_size(limit);
             self
         }
-        pub async fn get_auth_request(
+        pub async fn list_administrators(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetAuthRequestRequest>,
+            request: impl tonic::IntoRequest<super::ListAdministratorsRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetAuthRequestResponse>,
+            tonic::Response<super::ListAdministratorsResponse>,
             tonic::Status,
         > {
             self.inner
@@ -102,79 +104,23 @@ pub mod oidc_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.oidc.v2.OIDCService/GetAuthRequest",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("zitadel.oidc.v2.OIDCService", "GetAuthRequest"),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn create_callback(
-            &mut self,
-            request: impl tonic::IntoRequest<super::CreateCallbackRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::CreateCallbackResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.oidc.v2.OIDCService/CreateCallback",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("zitadel.oidc.v2.OIDCService", "CreateCallback"),
-                );
-            self.inner.unary(req, path, codec).await
-        }
-        pub async fn get_device_authorization_request(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetDeviceAuthorizationRequestRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetDeviceAuthorizationRequestResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.oidc.v2.OIDCService/GetDeviceAuthorizationRequest",
+                "/zitadel.internal_permission.v2beta.InternalPermissionService/ListAdministrators",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.oidc.v2.OIDCService",
-                        "GetDeviceAuthorizationRequest",
+                        "zitadel.internal_permission.v2beta.InternalPermissionService",
+                        "ListAdministrators",
                     ),
                 );
             self.inner.unary(req, path, codec).await
         }
-        pub async fn authorize_or_deny_device_authorization(
+        pub async fn create_administrator(
             &mut self,
-            request: impl tonic::IntoRequest<
-                super::AuthorizeOrDenyDeviceAuthorizationRequest,
-            >,
+            request: impl tonic::IntoRequest<super::CreateAdministratorRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::AuthorizeOrDenyDeviceAuthorizationResponse>,
+            tonic::Response<super::CreateAdministratorResponse>,
             tonic::Status,
         > {
             self.inner
@@ -188,14 +134,74 @@ pub mod oidc_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/zitadel.oidc.v2.OIDCService/AuthorizeOrDenyDeviceAuthorization",
+                "/zitadel.internal_permission.v2beta.InternalPermissionService/CreateAdministrator",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "zitadel.oidc.v2.OIDCService",
-                        "AuthorizeOrDenyDeviceAuthorization",
+                        "zitadel.internal_permission.v2beta.InternalPermissionService",
+                        "CreateAdministrator",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn update_administrator(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdateAdministratorRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::UpdateAdministratorResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.internal_permission.v2beta.InternalPermissionService/UpdateAdministrator",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "zitadel.internal_permission.v2beta.InternalPermissionService",
+                        "UpdateAdministrator",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        pub async fn delete_administrator(
+            &mut self,
+            request: impl tonic::IntoRequest<super::DeleteAdministratorRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::DeleteAdministratorResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/zitadel.internal_permission.v2beta.InternalPermissionService/DeleteAdministrator",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "zitadel.internal_permission.v2beta.InternalPermissionService",
+                        "DeleteAdministrator",
                     ),
                 );
             self.inner.unary(req, path, codec).await
